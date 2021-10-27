@@ -1,0 +1,35 @@
+--3a
+SELECT *
+FROM HoaDon
+WHERE year(NgayLap) = 2020;
+
+--3b
+SELECT *
+FROM KhachHang
+WHERE Tpho = 'TPHCM';
+
+--3c
+SELECT
+
+--3d
+SELECT *
+FROM SanPham
+WHERE SoLuongTon < 100;
+
+--3e
+SELECT SP.*
+FROM SanPham SP
+WHERE SP.MaSP = (SELECT TOP(5) CTHD.MaSP
+		 FROM CT_HoaDon CTDH
+		 WHERE CTHD.MaSP = SP.MaSP
+		 GROUP BY CTHD.MaSP
+		 ORDER BY SUM(CTHD.SoLuong) desc);
+
+--3f
+SELECT SP.*
+FROM SanPham SP
+WHERE SP.MaSP = (SELECT TOP(5) CTHD.MaSP
+		 FROM CT_HoaDon CTDH
+		 WHERE CTHD.MaSP = SP.MaSP
+		 GROUP BY CTHD.MaSP
+		 ORDER BY SUM(CTHD.ThanhTien) desc);
