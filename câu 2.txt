@@ -1,0 +1,23 @@
+--2a
+CREATE TRIGGER CTHD on CT_HoaDon
+FOR INSERT, UPDATE
+AS
+Begin
+ UPDATE CT_HoaDon
+ SET ThanhTien = SoLuong * (GiaBan - GiaGiam)
+End
+GO
+
+
+--2b
+CREATE TRIGGER MaHD on CT_HoaDon
+FOR INSERT, UPDATE
+AS
+Begin
+ UPDATE HoaDon
+ SET TongTien = (SELECT Sum(ThanhTien)
+		 FROM CT_HoaDon cthd
+		 WHERE cthd.MaHD = HoaDon.MaHD
+		 GROUP BY cthd.MaHD)
+End
+GO
