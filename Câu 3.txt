@@ -9,7 +9,9 @@ FROM KhachHang
 WHERE Tpho = 'TPHCM';
 
 --3c
-SELECT
+SELECT *
+FROM SanPham
+WHERE Gia >= 30000 AND Gia <= 100000
 
 --3d
 SELECT *
